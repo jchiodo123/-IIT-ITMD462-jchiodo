@@ -18,11 +18,11 @@ Description:
 Created a class for each number with a different color ".color1, .color2, etc", and an 
 id for the entire relevant div called "hidden" which will hide it from initial display.
 
-The js will unhide the relevant div via .show() and in turn select each element
+The selector.js will unhide the relevant div via .show() and in turn select each element
 from the relevant class, using n-child(x) selector, and add a .color class, 
 then fadeIn().
 
-The hidden div and show() are attemptng to elimnate the extra refresh from 
+The hidden div and .show() are attemptng to elimnate the extra refresh from 
 hide()/fadeIn() which looks like all elements flicker before being faded in.
 
 ### FizzBuzz Exercise Requirements - Implement in fizzbuzz.js
@@ -46,7 +46,8 @@ Other options is to sort the array and select the first array item, have to
 account for numnbers in array and could be costly if array is large, when you
 only want the largest number
 
-Another method was using Math.max()
+Another method is using Math.max() and the spread generator
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator
 
 	function max(numberArray) {
 		var largest = Math.max(...numberArray);
