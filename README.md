@@ -13,6 +13,18 @@ https://blackboard.iit.edu/webapps/blackboard/content/listContent.jsp?course_id=
 2. selector.css
 3. selector.js
 
+Description:
+
+Created a class for each number with a different color ".color1, .color2, etc", and an 
+id for the entire relevant div called "hidden" which will hide it from initial display.
+
+The js will unhide the relevant div via .show() and in turn select each element
+from the relevant class, using n-child(x) selector, and add a .color class, 
+then fadeIn().
+
+The hidden div and show() are attemptng to elimnate the extra refresh from 
+hide()/fadeIn() which looks like all elements flicker before being faded in.
+
 ### FizzBuzz Exercise Requirements - Implement in fizzbuzz.js
 
 1. fizzbuzz.html
@@ -24,9 +36,26 @@ https://blackboard.iit.edu/webapps/blackboard/content/listContent.jsp?course_id=
 2. array.css
 3. array.js
 
+Description:
+
+Many different ways to get largest (or smallest), I chose to iterate over
+each element with a foreach loop, comparing each array to previous storing 
+the largest.
+
+Other options is to sort the array and select the first array item, have to
+account for numnbers in array and could be costly if array is large, when you
+only want the largest number
+
+Another method was using Math.max()
+
+	function max(numberArray) {
+		var largest = Math.max(...numberArray);
+		return largest;
+	}
+ 
 -------------------------------------------------------------------
 
-## Assignment 2 - due 9/05/2017 
+## Assignment 2 - due 9/05/2017 - Exercises/Week2
 
 Added Amazeriffic example from book.
 
