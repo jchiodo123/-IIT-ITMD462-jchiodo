@@ -35,3 +35,8 @@ Added Amazeriffic example from book.
 3. stylesheets/style.css
 4. javascripts/app.js
 
+-------------------------------------------------------------------
+
+## Assignment 1- due 8/28/2017 
+
+Created IIT-ITMD462-jchiodo github directory.
