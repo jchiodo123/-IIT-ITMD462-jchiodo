@@ -1,4 +1,36 @@
-var main = function () {
+/*
+ *	John Chiodo
+ *	jchiodo@hawk.iit.edu
+ *	ITMD462 - Assignment3 
+ *	09/12/2017
+*/
+
+<!doctype html>
+<html>
+	<head>
+	  <title>Assignment Week 3 - Selectors</title>
+	  <link href='selectors.css' rel='stylesheet' type='text/css'>
+	</head>
+
+	<body>
+		<h1>Hi</h1>
+		<h2 class="important">Hi Again</h2>
+		<p>Random paragraph</p>
+		
+		<div id="hidden" class="relevant">
+			<p class="a">first</p>
+			<p class="a">second</p>
+			<p>third</p>
+			<p>fourth</p>
+			<p class="a">fifth</p>
+			<p class="a">sixth</p>
+			<p>seventh</p>
+		</div>
+		
+		<script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="selectors.js"></script>
+	</body>
+</html>var main = function () {
 	"use strict";
 	
 	/* The .relevant elements are hidden when the page is 
