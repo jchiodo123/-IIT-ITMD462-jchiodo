@@ -29,7 +29,18 @@ NOTE: Requires selector.css to be in the same directory.
 ### FizzBuzz Exercise Requirements - Implement in fizzbuzz.js
 
 1. fizzbuzz.html
-2. fizzbuzz.js
+2. fizzbuzz.css
+3. fizzbuzz.js
+
+Description:
+
+Used modulus operator to determine if evenly divisible by 3, 5 and 15.
+
+I so set appropriate name to string variable (i.e Fizzz, Buzz or FizzBuzz)
+and printed to ul list object. Added some color to the different catagories
+via css rules with the same name (i.e .Fizz, .Buzz, .FizzBuzz).
+
+Output also displayed output to console.log().
 
 ### Array Exercise Requirements - Implement in array.js
 
