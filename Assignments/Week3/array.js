@@ -34,7 +34,7 @@ var main = function () {
 
   var largest3 = max(numberArray3);
   $("#array3").text(largest3);
-  console.log("The largest number in the array is: " + largest3)
+  console.log("The largest number in the array is: " + largest3);
 };
 
 $(document).ready(main);
