@@ -11,32 +11,32 @@
 }
 
 body {
-    margin: 30px;
-    background: ivory;
-	font: 1em verdana, sans-serif;
+  margin: 30px;
+  background: ivory;
+  font: 1em verdana, sans-serif;
 }
 
 h1, h2 {
-	margin: 10px 0px;
+  margin: 10px 0px;
 }
 
 ul {
-list-style-type:none;
+  list-style-type:none;
 }
 
 #fboutput li {
-	margin: 3px 50px;
+  margin: 3px 50px;
 }
 .FizzBuzz {
-	color: red;
+  color: red;
 }
 
 .Fizz {
-	color: blue;
+  color: blue;
 }
 
 .Buzz {
-	color: green;
+  color: green;
 }
 
  
