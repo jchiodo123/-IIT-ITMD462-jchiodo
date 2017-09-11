@@ -28,8 +28,8 @@ NOTE: Requires selector.css to be in the same directory.
 
 ### FizzBuzz Exercise Requirements - Implement in fizzbuzz.js
 
-1. ** fizzbuzz.html - Display results in webpage. **
-2. ** fizzbuzz.css - add some colors to FizzBuzz. **
+1. **fizzbuzz.html - Display results in webpage.**
+2. **fizzbuzz.css - add some colors to FizzBuzz.**
 3. fizzbuzz.js
 
 Description:
@@ -44,7 +44,7 @@ Output also displayed to console.
 
 ### Array Exercise Requirements - Implement in array.js
 
-1. ** array.html - Display results in webpage. **
+1. **array.html - Display results in webpage.**
 2. array.js
 
 Description:
