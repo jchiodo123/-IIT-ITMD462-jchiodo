@@ -7,15 +7,15 @@
 
 var main = function () {
   "use strict";
-
+  
   function max(numberArray) {
-
+    
     var largestSoFar = numberArray[0]; // in case there are negative numbers
-    numberArray.forEach(function (arraynum) {
-      if (largestSoFar < arraynum) {
-        largestSoFar = arraynum;
-      }
-    });
+      numberArray.forEach(function (arraynum) {
+        if (largestSoFar < arraynum) {
+          largestSoFar = arraynum;
+        }
+      });
     return largestSoFar;
   }
   
@@ -34,7 +34,7 @@ var main = function () {
 
   var largest3 = max(numberArray3);
   $("#array3").text(largest3);
-  console.log("The largest number in the array is: " + largest3);
+  console.log("The largest number in the array is: " + largest3)
 };
 
 $(document).ready(main);
