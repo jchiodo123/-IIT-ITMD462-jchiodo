@@ -16,13 +16,13 @@ https://blackboard.iit.edu/webapps/blackboard/content/listContent.jsp?course_id=
 Description:
 
 The selector.js will unhide the relevant div via .show() and in turn select each element
-from the relevant class, using n-child(x) selector, and add .css('color'), then fadeIn().
+from the relevant class, using n-child(x) selector, add .css('color'), then fadeIn().
 
-The colors are stored in array numbersColors and each number if faded in 1 sec 
-later that the previous number.
+The colors for the numbers are stored in array numbersColors and each number is faded 
+in ~1 sec later that the previous number.
 
-The hidden div and .show() are attemptng to elimnate the extra refresh from 
-hide()/fadeIn() which looks like all elements flicker before being faded in.
+The id hidden and .show() are attempting to eliminate the flicker from 
+initial display of the page to the time the js script is modifying the numbers.
 
 NOTE: Requires selector.css to be in the same directory.
 
@@ -40,7 +40,7 @@ I so set appropriate name to string variable (i.e Fizzz, Buzz or FizzBuzz)
 and printed to ul list object. Added some color to the different catagories
 via css rules with the same name (i.e .Fizz, .Buzz, .FizzBuzz).
 
-Output also displayed output to console.log().
+Output also displayed output to console.
 
 ### Array Exercise Requirements - Implement in array.js
 
@@ -50,15 +50,18 @@ Output also displayed output to console.log().
 
 Description:
 
-Many different ways to get largest (or smallest), I chose to iterate over
-each element with a foreach loop, comparing each array to previous storing 
-the largest.
+Many different ways to get largest number, I chose to iterate over
+each element with a foreach loop, comparing each array element 
+to the previous storing the largest.
 
-Other options is to sort the array and select the first array item, have to
-account for numnbers in array and could be costly if array is large, when you
-only want the largest number
+The index.html will show 3 sample arrays and the largest number.
+Displaying the results in webpage and in the console.
 
-Another method is using Math.max() and the spread generator
+Other options are to sort the array and select the first array item, 
+but could be costly if the array is large.
+
+Another method is using Math.max() and the spread generator.
+
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator
 
 	function max(numberArray) {
