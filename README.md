@@ -10,7 +10,7 @@ https://blackboard.iit.edu/webapps/blackboard/content/listContent.jsp?course_id=
 ### Selector Exercise Requirements - Impliment in selectors.html + selectors.js 
 
 1. selector.html
-2. selector.css 
+2. **selector.css - optional, see below** 
 3. selector.js
 
 Description:
@@ -28,25 +28,24 @@ NOTE: Requires selector.css to be in the same directory.
 
 ### FizzBuzz Exercise Requirements - Implement in fizzbuzz.js
 
-1. fizzbuzz.html
-2. fizzbuzz.css
+1. ** fizzbuzz.html - Display results in webpage. **
+2. ** fizzbuzz.css - add some colors to FizzBuzz. **
 3. fizzbuzz.js
 
 Description:
 
 Used modulus operator to determine if evenly divisible by 3, 5 and 15.
 
-I so set appropriate name to string variable (i.e Fizzz, Buzz or FizzBuzz)
-and printed to ul list object. Added some color to the different catagories
-via css rules with the same name (i.e .Fizz, .Buzz, .FizzBuzz).
+I so set appropriate name to string variable (i.e Fizz, Buzz or FizzBuzz)
+and printed to ul list object. Added some color to the different categories
+via css rules using the same name (i.e .Fizz, .Buzz, .FizzBuzz).
 
-Output also displayed output to console.
+Output also displayed to console.
 
 ### Array Exercise Requirements - Implement in array.js
 
-1. array.html
-2. array.css
-3. array.js
+1. ** array.html - Display results in webpage. **
+2. array.js
 
 Description:
 
