@@ -5,25 +5,26 @@ ITM462 Assignment link:
 https://blackboard.iit.edu/webapps/blackboard/content/listContent.jsp?course_id=_64399_1&content_id=_523362_1&mode=reset
 
 -------------------------------------------------------------------
-## Assignment 3 - due 9/12/2017 - Exercises/Week3
+## Assignment 3 - due 9/12/2017 - Assignments/Week3
 
 ### Selector Exercise Requirements - Impliment in selectors.html + selectors.js 
 
 1. selector.html
-2. selector.css
+2. selector.css 
 3. selector.js
 
 Description:
 
-Created a class for each number with a different color ".color1, .color2, etc", and an 
-id for the entire relevant div called "hidden" which will hide it from initial display.
-
 The selector.js will unhide the relevant div via .show() and in turn select each element
-from the relevant class, using n-child(x) selector, and add a .color class, 
-then fadeIn().
+from the relevant class, using n-child(x) selector, and add .css('color'), then fadeIn().
+
+The colors are stored in array numbersColors and each number if faded in 1 sec 
+later that the previous number.
 
 The hidden div and .show() are attemptng to elimnate the extra refresh from 
 hide()/fadeIn() which looks like all elements flicker before being faded in.
+
+NOTE: Requires selector.css to be in the same directory.
 
 ### FizzBuzz Exercise Requirements - Implement in fizzbuzz.js
 
