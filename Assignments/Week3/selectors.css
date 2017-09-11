@@ -1,0 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 30px;
+    background: mintcream;
+    font-size: 1em;
+    font-family: sans-serif;
+}
+
+p, h1, h2 {
+	margin: 30px 0px ;
+}
+
+.relevant p {
+	margin: 10px;
+}
+
+/* hide tag for initial display */
+#hidden {
+	display: none;
+}
