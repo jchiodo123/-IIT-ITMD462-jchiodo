@@ -11,27 +11,27 @@ var main = function () {
 	function fizzbuzz(first, last) {	
 		var $fizzlist = $("#fboutput");
 		
-		for (var i = first; i <= last; i++) {
+		for (var number = first; number <= last; number++) {
 			var fbresult = "";
-			if (i % 15 === 0)
+			if (number % 15 === 0)
 				fbresult = "FizzBuzz";
-			else if (i % 3 === 0)
+			else if (number % 3 === 0)
 				fbresult = "Fizz";
-			else if (i % 5 === 0)
+			else if (number % 5 === 0)
 				fbresult = "Buzz";
 			
 			// display the result
 			if (fbresult == "") {
 				// if not fizz/buzz/fizzbuzz, append to list
-				$fizzlist.append($("<li>").text(i + " = " + i));
-				console.log(i + " = " + i);
+				$fizzlist.append($("<li>").text(number + " = " + number));
+				console.log(number + " = " + number);
 			} else { 
 				// if fizz/buzz/fizzbuzz, append to list and add color class
-				$fizzlist.append($("<li>").text(i + " = " + fbresult));
+				$fizzlist.append($("<li>").text(number + " = " + fbresult));
 				$fizzlist.find('li:last').addClass(fbresult);
-				console.log(i + " = " + fbresult);
+				console.log(number + " = " + fbresult);
 			}
-			
+		
 		}
 	}
   
