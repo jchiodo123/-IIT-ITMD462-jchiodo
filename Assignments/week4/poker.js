@@ -2,12 +2,31 @@ var main = function () {
   "use strict";
 
   var hand = [
-    { "rank": "king",  "suit": "diamonds" },
-    { "rank": "king",  "suit": "diamonds" },
-    { "rank": "nine",  "suit": "spades"   },
-    { "rank": "two",   "suit": "diamonds" },
-    { "rank": "two",   "suit": "diamonds" }
+    { "rank": "queen",  "suit": "diamonds" },
+    { "rank": "king",  "suit": "diamonds"  },
+    { "rank": "king",  "suit": "diamonds"   },
+    { "rank": "two",   "suit": "diamonds"  },
+    { "rank": "two",   "suit": "spades"  }
 	];
+
+  /* handAssessor()
+   * Examines a poker hand and displays all the winning
+   * hands in order of highest to lowest ranking.
+   *
+   * ranking order:
+   * Royal Flush (highest rank)
+   * Straight Flush
+   * Four of a kind
+   * Full House
+   * Flush
+   * Straight
+   * Three of a kind
+   * Two pair
+   * Pair (lowest rank)
+   * Bust (not a winning hand)
+   * 
+   * @param {Array of poker card objects} pokerhand
+   */
 
   function handAssessor(pokerHand) {
 
@@ -21,10 +40,11 @@ var main = function () {
     var isRoyalFlush = false;
 
     console.log("Your hand is:");
-    hand.forEach(function (card) {
-      console.log("\t" + card.rank + " of " + card.suit);
+    hand.forEach(function (card, index) {
+      console.log("\tcard" + (++index) +  ": " + card.rank + " of " + card.suit);
     });
-
+    console.log("<====================================>")
+    
     // initialize resultArray with 0
     for (var i = 0; i < 13; i++) {
       resultArray[i] = 0;
@@ -193,30 +213,54 @@ var main = function () {
           }
           break;
         case "32":
-          console.log("Your best hand is: Full House");
-          console.log("Your 2nd best hand is: Three of a Kind");
-          console.log("Your 3rd best hand is: Pair");
+          if(isFlush) { // full house higher than flush
+            console.log("Your best hand is: Full House");
+            console.log("Your 3nd best hand is: Flush");
+            console.log("Your 3rd best hand is: Three of a Kind");
+            console.log("Your 4th best hand is: Pair");
+          } else {
+            console.log("Your best hand is: Full House");
+            console.log("Your 2nd best hand is: Three of a Kind");
+            console.log("Your 3rd best hand is: Pair");
+          }
           break;
         case "311":
-          console.log("Your best hand is: Three of a kind");
-          console.log("Your 2nd best hand is: Pair");
+          if (isFlush) { // check for flush
+            console.log("Your best hand is: Flush");
+            console.log("Your 2nd hand is: Three of a kind");
+            console.log("Your 3rd best hand is: Pair");
+          } else {
+            console.log("Your best hand is: Three of a kind");
+            console.log("Your 2nd best hand is: Pair");
+          }
           break;
         case "221":
-          console.log("Your best hand is: Two Pair");
-          console.log("Your 2nd best hand is: Pair");
+          if (isFlush) { // check for flush
+            console.log("Your best hand is: Flush");
+            console.log("Your 2nd best hand is: Two Pair");
+            console.log("Your 3rd best hand is: Pair");
+          } else {
+            console.log("Your best hand is: Two Pair");
+            console.log("Your 2nd best hand is: Pair");
+          }
           break;
         case "2111":
-          console.log("Your best hand is: Pair");
+          if (isFlush) { // check for flush
+            console.log("Your best hand is: Flush");
+            console.log("Your 2nd best hand is: Pair");
+          } else {
+            console.log("Your best hand is: Pair");
+          }
           break;
         case "11111":
           if (isFlush) { // check for flush vs Bust
             console.log("Your best hand is: Flush");
           } else {
-            console.log("Your hand is a BUST!");
+            console.log("Your hand is a BUST");
           }
           break;
         default:
-          console.log("Undefined hand");
+          console.log("ERROR: Undefined hand");
       }
     }
   }
