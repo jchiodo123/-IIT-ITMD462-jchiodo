@@ -5,7 +5,23 @@ ITM462 Assignment link:
 https://blackboard.iit.edu/webapps/blackboard/content/listContent.jsp?course_id=_64399_1&content_id=_523362_1&mode=reset
 
 -------------------------------------------------------------------
-## Assignment 3 - due 9/12/2017 - Assignments/Week3
+
+## Assignment 4 - due 9/19/2017 - Assignments/week4
+
+### Write a function handAssessor(array) which accepts an array of 5 “cards”
+
+1. poker.html - just for launching poker.js
+2. poker.js 
+
+Used a histogram method for multiple rank hands (pair, 2 pair, three of a kind,
+full house, four of a kind) and sorting for sequential hands (straight, 
+straight flush, royal flush)
+
+poker.js will printout to console of all possible the winning hands in order.
+
+-------------------------------------------------------------------
+
+## Assignment 3 - due 9/12/2017 - Assignments/week3
 
 ### Selector Exercise Requirements - Impliment in selectors.html + selectors.js 
 
