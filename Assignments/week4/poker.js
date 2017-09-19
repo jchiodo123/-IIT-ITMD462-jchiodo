@@ -2,11 +2,11 @@ var main = function () {
   "use strict";
 
   var hand = [
-    { "rank": "queen",  "suit": "diamonds" },
-    { "rank": "king",  "suit": "diamonds"  },
-    { "rank": "king",  "suit": "diamonds"   },
-    { "rank": "two",   "suit": "diamonds"  },
-    { "rank": "two",   "suit": "spades"  }
+    { "rank": "five",  "suit": "spades" },
+    { "rank": "six",  "suit": "spades"  },
+    { "rank": "eight",  "suit": "spades"   },
+    { "rank": "nine",   "suit": "spades"  },
+    { "rank": "seven",   "suit": "clubs"  }
 	];
 
   /* handAssessor()
@@ -133,7 +133,8 @@ var main = function () {
 
     // if hand is sequential winner then it can not be multiple rank hand
     // check and print results for possible sequential hand
-    if (isStraight && !isFlush) {
+    if (isStraight && !isFlush || IsRoyalStraight && !isFlush) {
+      isStraight = true;
       console.log("Your best hand is: Straight");
     }
 
@@ -215,7 +216,7 @@ var main = function () {
         case "32":
           if(isFlush) { // full house higher than flush
             console.log("Your best hand is: Full House");
-            console.log("Your 3nd best hand is: Flush");
+            console.log("Your 2nd best hand is: Flush");
             console.log("Your 3rd best hand is: Three of a Kind");
             console.log("Your 4th best hand is: Pair");
           } else {
