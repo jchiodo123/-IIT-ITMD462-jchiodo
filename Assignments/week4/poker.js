@@ -2,11 +2,11 @@ var main = function () {
   "use strict";
 
   var hand = [
-    { "rank": "five",  "suit": "spades" },
-    { "rank": "six",  "suit": "spades"  },
-    { "rank": "eight",  "suit": "spades"   },
-    { "rank": "nine",   "suit": "spades"  },
-    { "rank": "seven",   "suit": "clubs"  }
+    { "rank": "ace",  "suit": "spades" },
+    { "rank": "ace",  "suit": "spades"  },
+    { "rank": "five",  "suit": "spades"   },
+    { "rank": "two",   "suit": "spades"  },
+    { "rank": "ten",   "suit": "spades"  }
 	];
 
   /* handAssessor()
