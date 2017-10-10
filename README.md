@@ -31,12 +31,14 @@ NodeJS server which responds to the following calls
 
 #### first time sets up linux box and installs node.js and express.
 
-install virtualbox 
+install virtualbox
+
 install vagrant
 
 #### in git bash shell ...
 
-mkdir into working directory, where you want to put server etc. 
+mkdir into working directory, where you want to put server etc.
+
 cd into working dir
 
 #### initialize server for first time
@@ -45,21 +47,25 @@ vagrant init arvindr21/mean-box
 #### modify Vagrantfile  with the following:
 	
 config.vm.box = "arvindr21/mean-box" 
+
 config.vm.define :TestServer 
+
 config.vm.network "forwarded_port", guest: 3000, host: 3000 
 		
 #### in gitbash shell, bring up server
 vagrant up
 
 #### in git bash shell ssh into server, them cd to shared directory
-vagrant ssh 
+vagrant ssh
+
 cd /vagrant
 
 #### With this box, node.js is outdated, update it but need curl first (need sudo on vagrant box)
 sudo apt-get install curl
 
 #### now update update node.js
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash - 
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+
 sudo apt-get install -y nodejs
 
 #### check node.js version, like 6.10.0 or something later.
