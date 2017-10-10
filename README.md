@@ -31,8 +31,7 @@ NodeJS server which responds to the following calls
 			
 ## Vagrant Setup Notes:
 
-#### first time sets up linux box and installs node.js
-#### and express.
+#### first time sets up linux box and installs node.js and express.
 
 install virtualbox
 install vagrant
@@ -46,32 +45,29 @@ vagrant init arvindr21/mean-box
 
 #### modify Vagrantfile  with the following:
 	
-config.vm.box = "arvindr21/mean-box"
-config.vm.define :TestServer
-config.vm.network "forwarded_port", guest: 3000, host: 3000
+ config.vm.box = "arvindr21/mean-box"
+ config.vm.define :TestServer
+ config.vm.network "forwarded_port", guest: 3000, host: 3000
 		
 #### in gitbash shell, bring up server
 vagrant up
 
-#### in gitbash shell, logon to server ...
-#### from git bash ssh into server, shared directory is /vagrant
+#### in git bash shell ssh into server, them cd to shared directory
 vagrant ssh
 cd /vagrant
 
-#### With this box, node.js is outdated, update it
-#### but need curl first (need sudo on vagrant box)
+#### With this box, node.js is outdated, update it but need curl first (need sudo on vagrant box)
 
 sudo apt-get install curl
 
 #### now update update node.js
-curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get install -y nodejs
+ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+ sudo apt-get install -y nodejs
 
 #### check node.js version, like 6.10.0 or something later.
 node -v
 
-#### create or copy app.js, with basic node server
-#### book page 190
+#### create or copy app.js, with basic node server (book page 190)
 create app.js
 
 #### from ssh shell, run app.js
@@ -81,8 +77,8 @@ node app.js
 point browser to localhost:3000, should see text msg from app.js 
 
 #### now try server with express
-mkdir express
-cd into express
+ mkdir express
+ cd into express
 
 #### need to get express, answer prompts, package.json created.
 npm init
@@ -90,16 +86,14 @@ npm init
 #### to install express with vagrant (sudo and --no-bin-links needed)
 sudo npm install --no-bin-links express --save
 
-#### create or copy server.js, with basic node server
-#### book page 192-193
+#### create or copy server.js, with basic node server (book page 192-193)
 create server.js file
 	
 #### run server.js
 node server.js
 
 #### test server.js
-point browser to localhost:3000, should see a different text msg 
-from each route in server.js
+point browser to localhost:3000, should see a different text msg from each route in server.js
 						
 -------------------------------------------------------------------
 
