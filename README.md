@@ -44,19 +44,12 @@ NodeJS server which responds to the following calls
 ### initialize server for first time
 	vagrant init arvindr21/mean-box
 
-### Copy files to speed up process
-	Launched when vagrant box is run, it checks the
-	versions of some of the packages, this is optional
-	copy provision.sh
-	
-
 ### modify Vagrantfile  with the following:
 	
 	config.vm.box = "arvindr21/mean-box"
 	config.vm.define :TestServer
 	config.vm.network "forwarded_port", guest: 3000, host: 3000
-	config.vm.provision :shell, :path => "provision.sh"
-	
+		
 ### in gitbash shell, bring up server
 	vagrant up
 
@@ -85,8 +78,8 @@ NodeJS server which responds to the following calls
 	node app.js
 
 ### test your server
-### point browser to localhost:3000, should see text msg from app.js
-### this is working, done
+point browser to localhost:3000, should see text msg from app.js 
+this is working, done
 
 ### now try server with express
 	mkdir express
