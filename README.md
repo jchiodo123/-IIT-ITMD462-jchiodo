@@ -33,10 +33,12 @@ NodeJS server which responds to the following calls
 
 #### first time sets up linux box and installs node.js and express.
 
+
 install virtualbox
 install vagrant
 
 #### in git bash shell ...
+
 mkdir into working directory, where you want to put server etc.
 cd into working dir
 
@@ -45,9 +47,9 @@ vagrant init arvindr21/mean-box
 
 #### modify Vagrantfile  with the following:
 	
- config.vm.box = "arvindr21/mean-box"
- config.vm.define :TestServer
- config.vm.network "forwarded_port", guest: 3000, host: 3000
+config.vm.box = "arvindr21/mean-box"
+config.vm.define :TestServer
+config.vm.network "forwarded_port", guest: 3000, host: 3000
 		
 #### in gitbash shell, bring up server
 vagrant up
@@ -57,12 +59,11 @@ vagrant ssh
 cd /vagrant
 
 #### With this box, node.js is outdated, update it but need curl first (need sudo on vagrant box)
-
 sudo apt-get install curl
 
 #### now update update node.js
- curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
- sudo apt-get install -y nodejs
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt-get install -y nodejs
 
 #### check node.js version, like 6.10.0 or something later.
 node -v
@@ -77,8 +78,8 @@ node app.js
 point browser to localhost:3000, should see text msg from app.js 
 
 #### now try server with express
- mkdir express
- cd into express
+mkdir express
+cd into express
 
 #### need to get express, answer prompts, package.json created.
 npm init
@@ -94,6 +95,7 @@ node server.js
 
 #### test server.js
 point browser to localhost:3000, should see a different text msg from each route in server.js
+
 						
 -------------------------------------------------------------------
 
