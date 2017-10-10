@@ -13,8 +13,8 @@ var	http = require("http");
 var	app;
 var port = process.env.port || 3000;
 
-var counterID = 1;
-var handStore = new Array();
+var counterID = 1;  // start IDs at 1
+var handStore = []; // stores the objects
 
 app = express();
 // middleware for parsing incoming text as JSON
@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 // ***************************************
 http.createServer(app).listen(port);
 console.log("Server Running on "+port+".\nLaunch http://localhost:"+port);
-console.log("CTRL+C to exit")
+console.log("CTRL+C to exit");
 
 // searchID - will search a card array and return the
 // index if found, if not found return -1
@@ -124,7 +124,7 @@ app.post('/hands/', function (req, res) {
 	
 	// check for empty object, send status 400 
 	if (Object.keys(handObj).length === 0) {
-		console.log("--- debug POST error begin ---")
+		console.log("--- debug POST error begin ---");
 		console.log("POST: Body is empty");
 		console.log('*** Sending HTTP Error - 400 for request: ' + req.url);
 		// send status 400, no data supplied
@@ -170,7 +170,7 @@ app.put('/hands/:id', function (req, res) {
 	
 	// check for empty object, send status 400 
 	if (Object.keys(handObj).length === 0) {
-		console.log("--- debug PUT error begin ---")
+		console.log("--- debug PUT error begin ---");
 		console.log("PUT: Body is empty");
 		console.log('*** Sending HTTP Error - 400 for request: ' + req.url);
 		// send status 400, no data supplied to update
@@ -182,17 +182,18 @@ app.put('/hands/:id', function (req, res) {
 	var index = searchID(handStore, "id", id);
 	
 	// *** console.log output ***
-	console.log("--- debug PUT begin ---")
+	console.log("--- debug PUT begin ---");
 	if (index === -1) {
 		console.log("==> id " + id + " was not found");
 		console.log('*** Sending HTTP Error - 404 for request: ' + req.url);
-		console.log("--- debug PUT end ---\n")
+		console.log("--- debug PUT end ---\n");
 		// send status 404, handId not found
 		res.status(404).send("Sorry, handId \"" + id + "\" was not found");
 	} else {
 		// *** console.log output ***
 		console.log("==> Found iD = " + (index+1) + "\n"); 
-		for (var key in handStore[index].cards){
+		var key;
+		for (key in handStore[index].cards){
 			if (handStore[index].cards.hasOwnProperty(key)){
 				console.log(handStore[index].cards[key]);
 			}
@@ -202,14 +203,14 @@ app.put('/hands/:id', function (req, res) {
 		
 		// *** console.log output ***
 		console.log("\n==> Replaced with:" + "\n"); 
-		for (var key in handStore[index].cards){
+		for (key in handStore[index].cards){
 			if (handStore[index].cards.hasOwnProperty(key)){
 				console.log(handStore[index].cards[key]);
 			}
 		}
 		
 		console.log('\n*** Sending HTTP 204 for put: ' + req.url);
-		console.log("--- debug PUT end ---\n")
+		console.log("--- debug PUT end ---\n");
 		// send status 204
 		res.status(204).send("\nUpdate for handId \"" + id + "\" was successful");
 	}
@@ -220,9 +221,9 @@ app.put('/hands/:id', function (req, res) {
 //// of the stack.
 //// https://expressjs.com/en/starter/faq.html
 app.use(function(req, res) {
-	console.log("--- Bad Route begin ---")
+	console.log("--- Bad Route begin ---");
 	console.log('*** Sending HTTP Error - 404 for request: ' + req.url);
-	console.log("--- Bad Route end ---\n")
+	console.log("--- Bad Route end ---\n");
 	// send status 404, invalid route
 	res.status(404).send('Sorry, Can not find that resource.');
 });
