@@ -32,7 +32,7 @@ console.log("CTRL+C to exit");
 // index if found, if not found return -1
 function searchID(ArrayToSearch, key, value) {
 	for (var i = 0; i < ArrayToSearch.length; i++) {
-		if (ArrayToSearch[i][key] == value) {
+		if (ArrayToSearch[i][key] === parseInt(value)) {
 			return i; // found it 
 		}
 	}
@@ -134,7 +134,7 @@ app.post('/hands/', function (req, res) {
 	} 
 
 	tempHand = {};
-	tempHand.id = counterID; 	// set id and out in object
+	tempHand.id = counterID; 	// set id
 	var handIdJson = JSON.stringify(tempHand); // save id to send later 
 	counterID++; 				// increment for next id
 	tempHand.cards = handObj;	// place array into object
