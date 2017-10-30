@@ -74,17 +74,13 @@ app.get('/users/:userid', function (req, res) {
 		console.log("--- debug GET object end ---\n");
 
 
-	if (typeof userStore[index].reuser === "undefined"){
+	if (typeof userStore[index].reminderCounter === "undefined"){
 		console.log('the property is not available...');
 	} else {
 		console.log('the property is available...');
 	}
 
-	// if (typeof userStore[index].user === "undefined"){
-	// 	console.log('the property is not available...');
-	// } else {
-	// 	console.log('the property is available...');
-	// }
+
 		
 		// send response with entire object
 		res.status(200).json(userStore[index].user);
@@ -155,11 +151,18 @@ app.post('/users/', function (req, res) {
 		return;
 	}
 
+	/* add check for duplicate userID */
+
 	tempUser = {};
-	tempUser.id = counterID; 	// set id
-	var userIdJson = JSON.stringify(tempUser); // save id to send later 
-	counterID++; 				// increment for next id
-	tempUser.user = userObj;	// place array into object
+	tempUser = userObj;	// place array into object
+
+	tempUser.id = counterID; 	// set global userid counter
+	var userIdJson = JSON.stringify(tempUser); // while at this step, save id to send later 
+	counterID++; 				// increment for next userid
+
+	tempUser = userObj;	// place array body into object
+	tempUser.reminderCounter = 1; // initialize reminderCounter and place into object
+
 	userStore.push(tempUser); 	// add to end of array
 
 	// *** console.log output ***
@@ -227,29 +230,42 @@ app.post('/users/:userid/reminder', function (req, res) {
 
 	// check for existing reminders and get next reminder index
 
-	var reminderIndex = 0;
-	if (typeof userStore[index].reminder === "undefined"){
-		console.log('No reminder array...');
-		reminderIndex++;
+	// tempUser = {};
+	// tempUser = userObj;	// place array into object
 
+	// tempUser.id = counterID; 	// set global userid counter
+	// var userIdJson = JSON.stringify(tempUser); // while at this step, save id to send later 
+	// counterID++; 				// increment for next userid
 
-	} else {
-		// reminderIndex = (userStore[index].length) - 1;
-		remainderIndex = (userStore[index].reminder.length) - 1;
-		console.log("Next reminder index: "  + reminderIndex);
+	// tempUser = userObj;	// place array body into object
+	// tempUser.reminderCounter = 1; // initialize reminderCounter and place into object
+
+	// userStore.push(tempUser); 	// add to end of array
 	
-	}
+	// }
 
 	tempReminder = {};
+	tempReminder = reminderObj;
 
-	tempReminderJson = {};
-	tempReminderJson.id = reminderIndex;
-	var reminderIdJson = JSON.stringify(tempReminderJson);
+	//tempReminderJson.id = userStore[index].reminderCounter;
+	var reminderIdJson = JSON.stringify(userStore[index].reminderCounter);
 	
-	TS = new Date();
-	reminderObj.created =  TS.toISOString();
+	tempReminder.reminderID = userStore[index].reminderCounter;
+
+	userStore[index].reminderCounter++; // increment ReminderCounter
 	
-	tempReminder.reminder = reminderObj;
+	reminderTimeStamp = new Date();
+	tempReminder.created =  reminderTimeStamp.toISOString();
+	
+	if (typeof userStore[index].reminder === "undefined"){
+		console.log('the property is not available...');
+		userStore[index].reminder = {};
+		userStore[index].reminder[0] = tempReminder;
+	} else {
+		console.log('the property is available...');
+	}
+
+
 	userStore[index].reminder = tempReminder;
 
 	// tempUser.id = counterID; 	// set id
