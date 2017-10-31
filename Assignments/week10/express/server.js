@@ -508,7 +508,6 @@ app.delete('/users/:userid/reminders/:reminderid', function (req, res) {
 	if (typeof userStore[index].reminder === "undefined"){
 		console.log("ID " + userid + " has no reminders");
 		console.log('Not an error, sending HTTP 204');
-		//res.sendStatus(204);
 		console.log("Sending HTTP Error - 404 for request: " + req.url);
 		res.status(404).send("Sorry, userid \"" + userid + "\" was not found");
 		console.log("--> debug DELETE /users/:userid/reminders/:reminderid check if user reminders END\n");
