@@ -14,7 +14,6 @@ var	app;
 var port = process.env.port || 3000;
 
 var counterID = 1;  // start IDs at 1
-var handStore = []; // stores the objects
 var userStore = []; // stores the user objects
 
 app = express();
