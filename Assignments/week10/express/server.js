@@ -62,7 +62,7 @@ app.get('/users/:userid', function (req, res) {
 	if (index === -1) {
 		console.log("userId " + userid + " was not found");
 		console.log("Sending HTTP Error - 404 for request: " + req.url);
-		res.status(404).send("Sorry, user \"" + userid + "\" was not found");
+		res.status(404).send("Sorry, userid " + userid + " was not found");
 		console.log("--> debug GET object END\n");
 	} else {
 		console.log("Found userid = " + (index+1) + "\n"); 
@@ -99,7 +99,7 @@ app.get('/users/:userid/reminders', function (req, res) {
 	if (index === -1) {
 		console.log("ID " + userid + " was not found");
 		console.log("Sending HTTP Error - 404 for request: " + req.url);
-		res.status(404).send("Sorry, userid \"" + userid + "\" was not found");
+		res.status(404).send("Sorry, userid " + userid + " was not found");
 		console.log("--> debug GET /users/:userid/reminder check users END ---\n");
 		return;
 	} else {
@@ -119,7 +119,7 @@ app.get('/users/:userid/reminders', function (req, res) {
 	if (typeof userStore[index].reminder === "undefined"){
 		console.log("ID " + userid + " has no reminders");
 		console.log("Sending HTTP Error - 404 for request: " + req.url);
-		res.status(404).send("Sorry, userid \"" + userid + "\" has no reminders");
+		res.status(404).send("Sorry, userid " + userid + " has no reminders");
 		console.log("--> debug GET /users/:userid/reminder check if user reminders end\n");
 		return;
 	} else {
@@ -167,7 +167,7 @@ app.get('/users/:userid/reminders/:reminderid', function (req, res) {
 	if (index === -1) {
 		console.log("ID " + userid + " was not found");
 		console.log("Sending HTTP Error - 404 for request: " + req.url);
-		res.status(404).send("Sorry, userid \"" + userid + "\" was not found");
+		res.status(404).send("Sorry, userid " + userid + " was not found");
 		console.log("--> debug GET /users/:userid/reminder/:reminderid check users END ---\n");
 		return;
 	} else {
@@ -187,7 +187,7 @@ app.get('/users/:userid/reminders/:reminderid', function (req, res) {
 	if (typeof userStore[index].reminder === "undefined"){
 		console.log("ID " + userid + " has no reminders");
 		console.log("Sending HTTP Error - 404 for request: " + req.url);
-		res.status(404).send("Sorry, userid \"" + userid + "\" has no reminders");
+		res.status(404).send("Sorry, userid " + userid + " has no reminders");
 		console.log("--> debug GET /users/:userid/reminder/:reminderid check if user reminders END\n");
 		return;
 	} else {
@@ -201,7 +201,7 @@ app.get('/users/:userid/reminders/:reminderid', function (req, res) {
 	if (reminderIndex === -1) {
 		console.log("reminderID " + reminderid + " was not found");
 		console.log("Sending HTTP Error - 404 for request: " + req.url);
-		res.status(404).send("Sorry, reminderid \"" + reminderid + "\" was not found");
+		res.status(404).send("Sorry, reminderid " + reminderid + " was not found");
 		console.log("--> debug GET /users/:userid/reminder/:reminderid check reminderid END\n");
 		return;
 	} else {
@@ -216,7 +216,7 @@ app.get('/users/:userid/reminders/:reminderid', function (req, res) {
 	reminderObj.created = userStore[index].reminder[reminderIndex].created;
 
 	// send 200 + reminderObj
-	res.status(200).send(reminderObj);
+	res.status(200).json(reminderObj);
 });
 
 
@@ -239,7 +239,7 @@ app.post('/users/', function (req, res) {
 		console.log("POST: Body is empty");
 		console.log("Sending HTTP Error - 400 for request: " + req.url);
 		// send status 400, no data supplied
-		res.status(400).send("Error: Data required for this operation");
+		res.status(400).json("Error: Data required for this operation");
 		console.log("--> debug POST /users body contents check END \n");
 		return;
 	}
@@ -249,8 +249,7 @@ app.post('/users/', function (req, res) {
 
 	tempUserIdJsonObj = {};
 	tempUserIdJsonObj.id = counterID; 	// set global userid counter
-	var userIdJson = JSON.stringify(tempUserIdJsonObj); // while at this step, save id to send later 
-	
+		
 	// build userid object
 	tempUserObj.name = userObj.user.name;
 	tempUserObj.email = userObj.user.email;
@@ -275,7 +274,7 @@ app.post('/users/', function (req, res) {
 	console.log("--> POST /users debug dump END\n");
 
 	// send status 200 and just userid object
-	res.status(200).send(userIdJson);
+	res.status(200).json(tempUserIdJsonObj);
 });
 
 
@@ -311,7 +310,7 @@ app.post('/users/:userid/reminders', function (req, res) {
 	if (index === -1) {
 		console.log("ID " + userid + " was not found");
 		console.log("Sending HTTP Error - 404 for request: " + req.url);
-		res.status(404).send("Sorry, userid \"" + userid + "\" was not found");
+		res.status(404).send("Sorry, userid " + userid + " was not found");
 		console.log("--> POST /users/:userid/reminder POST check users END\n");
 		return;
 	} else {
@@ -331,8 +330,7 @@ app.post('/users/:userid/reminders', function (req, res) {
 	tempReminderIdObj = {}; // empty temp object for send
 
 	tempReminderIdObj.reminderid = userStore[index].reminderCounter; // get current counter
-	var reminderIdJson = JSON.stringify(tempReminderIdObj); // save JSON for sending
-	
+		
 	tempReminder.reminderID = userStore[index].reminderCounter;  // insert counter
 	tempReminder.title = reminderObj.reminder.title;             // insert title
 	tempReminder.description = reminderObj.reminder.description; // insert description
@@ -363,7 +361,7 @@ app.post('/users/:userid/reminders', function (req, res) {
 	console.log("--> POST /users/:userid/reminder dump END\n");
 	
 	// send status 200 and id
-	res.status(200).send(reminderIdJson);
+	res.status(200).json(tempReminderIdObj);
 });
 
 
@@ -385,7 +383,7 @@ app.delete('/users/:userid', function (req, res) {
 	if (index === -1) {
 		console.log("ID " + userid + " was not found");
 		console.log("Sending HTTP Error - 404 for request: " + req.url);
-		res.status(404).send("Sorry, userid \"" + userid + "\" was not found");
+		res.status(404).send("Sorry, userid " + userid + " was not found");
 		console.log("--> DELETE /users/:userid/reminder POST check users END\n");
 		return;
 	} else {
@@ -431,7 +429,7 @@ app.delete('/users/:userid/reminders', function (req, res) {
 	if (index === -1) {
 		console.log("ID " + userid + " was not found");
 		console.log("Sending HTTP Error - 404 for request: " + req.url);
-		res.status(404).send("Sorry, userid \"" + userid + "\" was not found");
+		res.status(404).send("Sorry, userid " + userid + " was not found");
 		console.log("--> DELETE /users/:userid/reminder POST check users END\n");
 		return;
 	} else {
@@ -488,7 +486,7 @@ app.delete('/users/:userid/reminders/:reminderid', function (req, res) {
 	if (index === -1) {
 		console.log("ID " + userid + " was not found");
 		console.log("Sending HTTP Error - 404 for request: " + req.url);
-		res.status(404).send("Sorry, userid \"" + userid + "\" was not found");
+		res.status(404).send("Sorry, userid " + userid + " was not found");
 		console.log("--> DELETE /users/:userid/reminder/:reminderid check users END\n");
 		return;
 	} else {
@@ -509,7 +507,7 @@ app.delete('/users/:userid/reminders/:reminderid', function (req, res) {
 		console.log("ID " + userid + " has no reminders");
 		console.log('Not an error, sending HTTP 204');
 		console.log("Sending HTTP Error - 404 for request: " + req.url);
-		res.status(404).send("Sorry, userid \"" + userid + "\" was not found");
+		res.status(404).send("Sorry, userid " + userid + " was not found");
 		console.log("--> debug DELETE /users/:userid/reminders/:reminderid check if user reminders END\n");
 		return;
 	} else {
@@ -524,7 +522,7 @@ app.delete('/users/:userid/reminders/:reminderid', function (req, res) {
 		console.log("reminderID " + reminderid + " was not found");
 		console.log('Not an error, sending HTTP 204');
 		console.log("Sending HTTP Error - 404 for request: " + req.url);
-		res.status(404).send("Sorry, reminderid \"" + reminderid + "\" was not found");
+		res.status(404).send("Sorry, reminderid " + reminderid + " was not found");
 		console.log("--> debug DELETE /users/:userid/reminder/:reminderid check reminderid END\n");
 		return;
 	} else {
