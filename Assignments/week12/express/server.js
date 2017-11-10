@@ -31,6 +31,12 @@ app.get('/', function (req, res) {
 	res.sendFile(path.join(__dirname, '../public', 'index.html'));
 });
 
+// default is no console debug statements
+// anything but 'true' will  suppress console.log 
+// including env not set (undefined).
+console.log("DEBUG_MODE_ON is set to: " + process.env.DEBUG_MODE_ON);
+var LOG = process.env.DEBUG_MODE_ON === 'true' ? console.log.bind(console) : function () {};
+
 
 // ***************************************
 // START SERVER
@@ -43,7 +49,7 @@ console.log("CTRL+C to exit");
 // index if found, if not found return -1
 function searchID(ArrayToSearch, key, value) { // 1 2
 	for (var i = 0; i < ArrayToSearch.length; i++) {
-		//console.log("inside: "+ ArrayToSearch.length);
+		//LOG("inside: "+ ArrayToSearch.length);
 		if (ArrayToSearch[i][key] === parseInt(value)) {
 			return i; // found it 
 		}
@@ -69,20 +75,20 @@ app.get('/users/:userid', function (req, res) {
 
 	// check for valid userid
 	var index = searchID(userStore, "id", userid);
-	console.log("--> debug GET object BEGIN");
+	LOG("--> debug GET object BEGIN");
 	if (index === -1) {
-		console.log("userId " + userid + " was not found");
-		console.log("Sending HTTP Error - 404 for request: " + req.url);
+		LOG("userId " + userid + " was not found");
+		LOG("Sending HTTP Error - 404 for request: " + req.url);
 		res.status(404).send("Sorry, userid " + userid + " was not found");
-		console.log("--> debug GET object END\n");
+		LOG("--> debug GET object END\n");
 	} else {
-		console.log("Found userid = " + (index+1) + "\n"); 
+		LOG("Found userid = " + (index+1) + "\n"); 
 		for (var key in userStore[index].user){
 			if (userStore[index].user.hasOwnProperty(key)){
-				console.log(userStore[index].user[key]);
+				LOG(userStore[index].user[key]);
 			}
 		}
-		console.log("--> debug GET object END\n");
+		LOG("--> debug GET object END\n");
 
 	// send response and user object
 	res.status(200).json(userStore[index].user);
@@ -106,36 +112,36 @@ app.get('/users/:userid/reminders', function (req, res) {
 
 	// check for valid userid
 	var index = searchID(userStore, "id", userid);
-	console.log("--- debug GET /users/:userid/reminder check users BEGIN ---");
+	LOG("--- debug GET /users/:userid/reminder check users BEGIN ---");
 	if (index === -1) {
-		console.log("ID " + userid + " was not found");
-		console.log("Sending HTTP Error - 404 for request: " + req.url);
+		LOG("ID " + userid + " was not found");
+		LOG("Sending HTTP Error - 404 for request: " + req.url);
 		res.status(404).send("Sorry, userid " + userid + " was not found");
-		console.log("--> debug GET /users/:userid/reminder check users END ---\n");
+		LOG("--> debug GET /users/:userid/reminder check users END ---\n");
 		return;
 	} else {
-		console.log("Found userid = " + (index +1) + ":"); 
+		LOG("Found userid = " + (index +1) + ":"); 
 		userStore.forEach(function (eachUser) {
 	    for (var key in eachUser) {
 			if (eachUser.hasOwnProperty(key)){
-				console.log(key +":", eachUser[key]);
+				LOG(key +":", eachUser[key]);
 			}
 		}
 	});
-		console.log("--> debug GET /users/:userid/reminder check users END\n");
+		LOG("--> debug GET /users/:userid/reminder check users END\n");
 	}
 
 	// check if user has reminders
-	console.log("--> debug GET /users/:userid/reminder check if user reminders begin");
+	LOG("--> debug GET /users/:userid/reminder check if user reminders begin");
 	if (typeof userStore[index].reminder === "undefined"){
-		console.log("ID " + userid + " has no reminders");
-		console.log("Sending HTTP Error - 404 for request: " + req.url);
+		LOG("ID " + userid + " has no reminders");
+		LOG("Sending HTTP Error - 404 for request: " + req.url);
 		res.status(404).send("Sorry, userid " + userid + " has no reminders");
-		console.log("--> debug GET /users/:userid/reminder check if user reminders end\n");
+		LOG("--> debug GET /users/:userid/reminder check if user reminders end\n");
 		return;
 	} else {
-		console.log("ID " + userid + " has reminders");
-		console.log("--> debug GET /users/:userid/reminder check if user reminders end\n");
+		LOG("ID " + userid + " has reminders");
+		LOG("--> debug GET /users/:userid/reminder check if user reminders end\n");
 	}
 
 	// need to repack the array and remove the "reminderID" key from all the reminders
@@ -174,50 +180,50 @@ app.get('/users/:userid/reminders/:reminderid', function (req, res) {
 
 	// check for valid userid
 	var index = searchID(userStore, "id", userid);
-	console.log("--> debug GET /users/:userid/reminder/:reminderid check users BEGIN ---");
+	LOG("--> debug GET /users/:userid/reminder/:reminderid check users BEGIN ---");
 	if (index === -1) {
-		console.log("ID " + userid + " was not found");
-		console.log("Sending HTTP Error - 404 for request: " + req.url);
+		LOG("ID " + userid + " was not found");
+		LOG("Sending HTTP Error - 404 for request: " + req.url);
 		res.status(404).send("Sorry, userid " + userid + " was not found");
-		console.log("--> debug GET /users/:userid/reminder/:reminderid check users END ---\n");
+		LOG("--> debug GET /users/:userid/reminder/:reminderid check users END ---\n");
 		return;
 	} else {
-		console.log("Found userid = " + userid + ":"); 
+		LOG("Found userid = " + userid + ":"); 
 		userStore.forEach(function (eachUser) {
 	    for (var key in eachUser) {
 			if (eachUser.hasOwnProperty(key)){
-				console.log(key +":", eachUser[key]);
+				LOG(key +":", eachUser[key]);
 			}
 		}
 	});
-		console.log("--> debug GET /users/:userid/reminder/:reminderid check users END\n");
+		LOG("--> debug GET /users/:userid/reminder/:reminderid check users END\n");
 	}
 
 	// check if user has any reminders
-	console.log("--> debug GET /users/:userid/reminder/:reminderid check if user reminders begin");
+	LOG("--> debug GET /users/:userid/reminder/:reminderid check if user reminders begin");
 	if (typeof userStore[index].reminder === "undefined"){
-		console.log("ID " + userid + " has no reminders");
-		console.log("Sending HTTP Error - 404 for request: " + req.url);
+		LOG("ID " + userid + " has no reminders");
+		LOG("Sending HTTP Error - 404 for request: " + req.url);
 		res.status(404).send("Sorry, userid " + userid + " has no reminders");
-		console.log("--> debug GET /users/:userid/reminder/:reminderid check if user reminders END\n");
+		LOG("--> debug GET /users/:userid/reminder/:reminderid check if user reminders END\n");
 		return;
 	} else {
-		console.log("ID " + userid + " has reminders");
-		console.log("--> debug GET /users/:userid/reminder/:reminderid check if user reminders END\n");
+		LOG("ID " + userid + " has reminders");
+		LOG("--> debug GET /users/:userid/reminder/:reminderid check if user reminders END\n");
 	}
 
 	// check for valid reminderID
 	var reminderIndex = searchID(userStore[index].reminder, "reminderID", reminderid);
-	console.log("--> debug GET /users/:userid/reminder/:reminderid check reminderid BEGIN");
+	LOG("--> debug GET /users/:userid/reminder/:reminderid check reminderid BEGIN");
 	if (reminderIndex === -1) {
-		console.log("reminderID " + reminderid + " was not found");
-		console.log("Sending HTTP Error - 404 for request: " + req.url);
+		LOG("reminderID " + reminderid + " was not found");
+		LOG("Sending HTTP Error - 404 for request: " + req.url);
 		res.status(404).send("Sorry, reminderid " + reminderid + " was not found");
-		console.log("--> debug GET /users/:userid/reminder/:reminderid check reminderid END\n");
+		LOG("--> debug GET /users/:userid/reminder/:reminderid check reminderid END\n");
 		return;
 	} else {
-		console.log("Found reminderid = " + reminderid + ", for userid = " + userid + ":"); 
-		console.log("--> debug GET /users/:userid/reminder/:reminderid check reminderid END\n");
+		LOG("Found reminderid = " + reminderid + ", for userid = " + userid + ":"); 
+		LOG("--> debug GET /users/:userid/reminder/:reminderid check reminderid END\n");
 	}
 
 	// build new send object without the "reminderID" key
@@ -246,12 +252,12 @@ app.post('/users/', function (req, res) {
 	
 	// check for empty object, send status 400 
 	if (Object.keys(userObj).length === 0) {
-		console.log("--> debug POST /users body contents check BEGIN");
-		console.log("POST: Body is empty");
-		console.log("Sending HTTP Error - 400 for request: " + req.url);
+		LOG("--> debug POST /users body contents check BEGIN");
+		LOG("POST: Body is empty");
+		LOG("Sending HTTP Error - 400 for request: " + req.url);
 		// send status 400, no data supplied
 		res.status(400).json("Error: Data required for this operation");
-		console.log("--> debug POST /users body contents check END \n");
+		LOG("--> debug POST /users body contents check END \n");
 		return;
 	}
 
@@ -273,16 +279,16 @@ app.post('/users/', function (req, res) {
 	counterID++; 	// increment for next userid
 	userStore.push(tempUserIdObj); 	// add to end of array
 
-	// console.log output
-	console.log("--> POST /users debug dump BEGIN");
+	// LOG output
+	LOG("--> POST /users debug dump BEGIN");
 	userStore.forEach(function (eachUser) {
 	    for (var key in eachUser) {
 			if (eachUser.hasOwnProperty(key)){
-				console.log(key +":", eachUser[key]);
+				LOG(key +":", eachUser[key]);
 			}
 		}
 	});
-	console.log("--> POST /users debug dump END\n");
+	LOG("--> POST /users debug dump END\n");
 
 	// send status 200 and just userid object
 	res.status(200).json(tempUserIdJsonObj);
@@ -306,34 +312,34 @@ app.post('/users/:userid/reminders', function (req, res) {
 
 	// check for empty object, send status 400 
 	if (Object.keys(reminderObj).length === 0) {
-		console.log("--> POST /users/:userid/reminder body contents check BEGIN");
-		console.log("POST: Body is empty");
-		console.log("Sending HTTP Error - 400 for request: " + req.url);
+		LOG("--> POST /users/:userid/reminder body contents check BEGIN");
+		LOG("POST: Body is empty");
+		LOG("Sending HTTP Error - 400 for request: " + req.url);
 		// send status 400, no data supplied
 		res.status(400).send("Error: Data required for this operation");
-		console.log("--> POST /users/:userid/reminder body contents check END\n");
+		LOG("--> POST /users/:userid/reminder body contents check END\n");
 		return;
 	}
 
 	// check for valid userid
 	var index = searchID(userStore, "id", userid);
-	console.log("--> POST /users/:userid/reminder check users BEGIN");
+	LOG("--> POST /users/:userid/reminder check users BEGIN");
 	if (index === -1) {
-		console.log("ID " + userid + " was not found");
-		console.log("Sending HTTP Error - 404 for request: " + req.url);
+		LOG("ID " + userid + " was not found");
+		LOG("Sending HTTP Error - 404 for request: " + req.url);
 		res.status(404).send("Sorry, userid " + userid + " was not found");
-		console.log("--> POST /users/:userid/reminder POST check users END\n");
+		LOG("--> POST /users/:userid/reminder POST check users END\n");
 		return;
 	} else {
-		console.log("Found userid = " + (index+1) + ":"); 
+		LOG("Found userid = " + (index+1) + ":"); 
 		userStore.forEach(function (eachUser) {
 	    for (var key in eachUser) {
 			if (eachUser.hasOwnProperty(key)){
-				console.log(key +":", eachUser[key]);
+				LOG(key +":", eachUser[key]);
 			}
 		}
 	});
-		console.log("--> POST /users/:userid/reminder check users END\n");
+		LOG("--> POST /users/:userid/reminder check users END\n");
 	}	
 
 	// build reminder object
@@ -360,16 +366,16 @@ app.post('/users/:userid/reminders', function (req, res) {
 
 	userStore[index].reminderCounter++; // increment ReminderCounter
 
-	// console.log output
-	console.log("--> POST /users/:userid/reminder dump BEGIN");
+	// LOG output
+	LOG("--> POST /users/:userid/reminder dump BEGIN");
 	userStore.forEach(function (eachUser) {
 	    for (var key in eachUser) {
 			if (eachUser.hasOwnProperty(key)){
-				console.log(key +":", eachUser[key]);
+				LOG(key +":", eachUser[key]);
 			}
 		}
 	});
-	console.log("--> POST /users/:userid/reminder dump END\n");
+	LOG("--> POST /users/:userid/reminder dump END\n");
 	
 	// send status 200 and id
 	res.status(200).json(tempReminderIdObj);
@@ -390,24 +396,24 @@ app.delete('/users/:userid', function (req, res) {
 	
 	// check for valid userid
 	var index = searchID(userStore, "id", userid);
-	console.log("--> DELETE /users/:userid/reminder check users BEGIN");
+	LOG("--> DELETE /users/:userid/reminder check users BEGIN");
 	if (index === -1) {
-		console.log("ID " + userid + " was not found");
-		console.log("Sending HTTP Error - 404 for request: " + req.url);
+		LOG("ID " + userid + " was not found");
+		LOG("Sending HTTP Error - 404 for request: " + req.url);
 		res.status(404).send("Sorry, userid " + userid + " was not found");
-		console.log("--> DELETE /users/:userid/reminder POST check users END\n");
+		LOG("--> DELETE /users/:userid/reminder POST check users END\n");
 		return;
 	} else {
-		console.log("Found userid = " + (index+1) + ":"); 
+		LOG("Found userid = " + (index+1) + ":"); 
 		userStore.forEach(function (eachUser) {
 	    for (var key in eachUser) {
 			if (eachUser.hasOwnProperty(key)){
-				console.log(key +":", eachUser[key]);
+				LOG(key +":", eachUser[key]);
 			}
 		}
 	});
-		console.log("\nDeleting userid " + userid + " and all reminders");
-		console.log("--> DELETE /users/:userid/reminder check users END\n");
+		LOG("\nDeleting userid " + userid + " and all reminders");
+		LOG("--> DELETE /users/:userid/reminder check users END\n");
 	}
 
 	// delete userid from userStore array
@@ -436,37 +442,37 @@ app.delete('/users/:userid/reminders', function (req, res) {
 	
 	// check for valid userid
 	var index = searchID(userStore, "id", userid);
-	console.log("--> DELETE /users/:userid/reminder check users BEGIN");
+	LOG("--> DELETE /users/:userid/reminder check users BEGIN");
 	if (index === -1) {
-		console.log("ID " + userid + " was not found");
-		console.log("Sending HTTP Error - 404 for request: " + req.url);
+		LOG("ID " + userid + " was not found");
+		LOG("Sending HTTP Error - 404 for request: " + req.url);
 		res.status(404).send("Sorry, userid " + userid + " was not found");
-		console.log("--> DELETE /users/:userid/reminder POST check users END\n");
+		LOG("--> DELETE /users/:userid/reminder POST check users END\n");
 		return;
 	} else {
-		console.log("Found userid = " + (index+1) + ":"); 
+		LOG("Found userid = " + (index+1) + ":"); 
 		userStore.forEach(function (eachUser) {
 	    for (var key in eachUser) {
 			if (eachUser.hasOwnProperty(key)){
-				console.log(key +":", eachUser[key]);
+				LOG(key +":", eachUser[key]);
 			}
 		}
 	});
-		console.log("--> DELETE /users/:userid/reminder check users END\n");
+		LOG("--> DELETE /users/:userid/reminder check users END\n");
 	}
 
 	// check if user has reminders
-	console.log("--> debug DELETE /users/:userid/reminders check if user reminders BEGIN");
+	LOG("--> debug DELETE /users/:userid/reminders check if user reminders BEGIN");
 	if (typeof userStore[index].reminder === "undefined"){
-		console.log("ID " + userid + " has no reminders");
-		console.log('Not an error, sending HTTP 204');
+		LOG("ID " + userid + " has no reminders");
+		LOG('Not an error, sending HTTP 204');
 		res.sendStatus(204);
-		console.log("--> debug DELETE /users/:userid/reminders check if user reminders END\n");
+		LOG("--> debug DELETE /users/:userid/reminders check if user reminders END\n");
 		return;
 	} else {
-		console.log("ID " + userid + " has reminders");
-		console.log("Deleting all reminders associated with userid " + userid);
-		console.log("--> debug DELETE /users/:userid/reminders check if user reminders END\n");
+		LOG("ID " + userid + " has reminders");
+		LOG("Deleting all reminders associated with userid " + userid);
+		LOG("--> debug DELETE /users/:userid/reminders check if user reminders END\n");
 	}
 
 	// clear reminder array and reset reminderCounter
@@ -493,53 +499,53 @@ app.delete('/users/:userid/reminders/:reminderid', function (req, res) {
 	
 	// check for valid userid
 	var index = searchID(userStore, "id", userid);
-	console.log("--> DELETE /users/:userid/reminder/:reminderid check users BEGIN");
+	LOG("--> DELETE /users/:userid/reminder/:reminderid check users BEGIN");
 	if (index === -1) {
-		console.log("ID " + userid + " was not found");
-		console.log("Sending HTTP Error - 404 for request: " + req.url);
+		LOG("ID " + userid + " was not found");
+		LOG("Sending HTTP Error - 404 for request: " + req.url);
 		res.status(404).send("Sorry, userid " + userid + " was not found");
-		console.log("--> DELETE /users/:userid/reminder/:reminderid check users END\n");
+		LOG("--> DELETE /users/:userid/reminder/:reminderid check users END\n");
 		return;
 	} else {
-		console.log("Found userid = " + (index+1) + ":"); 
+		LOG("Found userid = " + (index+1) + ":"); 
 		userStore.forEach(function (eachUser) {
 	    for (var key in eachUser) {
 			if (eachUser.hasOwnProperty(key)){
-				console.log(key +":", eachUser[key]);
+				LOG(key +":", eachUser[key]);
 			}
 		}
 	});
-		console.log("--> DELETE /users/:userid/reminder/:reminderid check users END\n");
+		LOG("--> DELETE /users/:userid/reminder/:reminderid check users END\n");
 	}
 
 	// check if user has reminders
-	console.log("--> debug DELETE /users/:userid/reminder/:reminderid check if user reminders BEGIN");
+	LOG("--> debug DELETE /users/:userid/reminder/:reminderid check if user reminders BEGIN");
 	if (typeof userStore[index].reminder === "undefined"){
-		console.log("ID " + userid + " has no reminders");
-		console.log('Not an error, sending HTTP 204');
-		console.log("Sending HTTP Error - 404 for request: " + req.url);
+		LOG("ID " + userid + " has no reminders");
+		LOG('Not an error, sending HTTP 204');
+		LOG("Sending HTTP Error - 404 for request: " + req.url);
 		res.status(404).send("Sorry, userid " + userid + " was not found");
-		console.log("--> debug DELETE /users/:userid/reminders/:reminderid check if user reminders END\n");
+		LOG("--> debug DELETE /users/:userid/reminders/:reminderid check if user reminders END\n");
 		return;
 	} else {
-		console.log("ID " + userid + " has reminders");
-		console.log("--> debug DELETE /users/:userid/reminders/:reminderid check if user reminders END\n");
+		LOG("ID " + userid + " has reminders");
+		LOG("--> debug DELETE /users/:userid/reminders/:reminderid check if user reminders END\n");
 	}
 
 	// check for reminder
 	var reminderIndex = searchID(userStore[index].reminder, "reminderID", reminderid);
-	console.log("--> debug DELETE /users/:userid/reminder/:reminderid check reminderid BEGIN");
+	LOG("--> debug DELETE /users/:userid/reminder/:reminderid check reminderid BEGIN");
 	if (reminderIndex === -1) {
-		console.log("reminderID " + reminderid + " was not found");
-		console.log('Not an error, sending HTTP 204');
-		console.log("Sending HTTP Error - 404 for request: " + req.url);
+		LOG("reminderID " + reminderid + " was not found");
+		LOG('Not an error, sending HTTP 204');
+		LOG("Sending HTTP Error - 404 for request: " + req.url);
 		res.status(404).send("Sorry, reminderid " + reminderid + " was not found");
-		console.log("--> debug DELETE /users/:userid/reminder/:reminderid check reminderid END\n");
+		LOG("--> debug DELETE /users/:userid/reminder/:reminderid check reminderid END\n");
 		return;
 	} else {
-		console.log("Found reminderid = " + reminderid + ", for userid = " + userid + ":");
-		console.log("Deleting reminderid = " + reminderid + ", for userid = " + userid + ":"); 
-		console.log("--> debug DELETE /users/:userid/reminder/:reminderid check reminderid END\n");
+		LOG("Found reminderid = " + reminderid + ", for userid = " + userid + ":");
+		LOG("Deleting reminderid = " + reminderid + ", for userid = " + userid + ":"); 
+		LOG("--> debug DELETE /users/:userid/reminder/:reminderid check reminderid END\n");
 	}
 
 	// remove the reminder from the array	
@@ -554,9 +560,9 @@ app.delete('/users/:userid/reminders/:reminderid', function (req, res) {
 // of the stack.
 // https://expressjs.com/en/starter/faq.html
 app.use(function(req, res) {
-	console.log("--- Bad Route begin ---");
-	console.log('*** Sending HTTP Error - 404 for request: ' + req.url);
-	console.log("--- Bad Route end ---\n");
+	LOG("--- Bad Route begin ---");
+	LOG('*** Sending HTTP Error - 404 for request: ' + req.url);
+	LOG("--- Bad Route end ---\n");
 	// send status 404, invalid route
 	res.status(404).send('Sorry, Can not find that resource.');
 });
