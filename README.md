@@ -5,22 +5,22 @@ ITM462 Assignment link:
 https://blackboard.iit.edu/webapps/blackboard/content/listContent.jsp?course_id=_64399_1&content_id=_523362_1&mode=reset
 
 
-## Assignment 7 - due 11/07/2014 - Assignments/week12
+## Assignment 8 - due 11/14/2014 - Assignments/week12
 
-Description
+Description  
 As a developer of your application
 I want to be able to execute automated tests which exercise the functionality of the application
 So that I can be ensure that my changes do not break existing functionality
 
 Acceptance Criteria
-    * Must write automated tests for the functionality from assignment 6/7.
-    * At minimum all happy paths should be tested (i.e. successful GET returns expected info, GET against missing element returns 404, etc)
-    * Must be executed when running npm test
+   * Must write automated tests for the functionality from assignment 6/7.
+   * At minimum all happy paths should be tested (i.e. successful GET returns expected info, GET against missing element returns 404, etc)
+   * Must be executed when running npm test
 	
 ## Assignment 7 - due 11/07/2017 - Assignments/week11
 
 Description  
-As a user of your application  
+As a user of your application
 I want to be able to create reminders associated with my user through a user interface
 So that I can be reminded of things
 
