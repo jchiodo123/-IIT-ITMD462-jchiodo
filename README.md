@@ -16,6 +16,36 @@ Acceptance Criteria
    * Must write automated tests for the functionality from assignment 6/7.
    * At minimum all happy paths should be tested (i.e. successful GET returns expected info, GET against missing element returns 404, etc)
    * Must be executed when running npm test
+   
+
+### Setup win10 to work with mocha
+If your "npm test" is not finding mocha then probably your path in
+win10 is not setup, found this link and summarized below:  
+https://stackoverflow.com/questions/27864040/fixing-npm-path-in-windows-8  
+
+In gitbash with vagrant loaded, get the path from npm:  
+npm config get prefix  
+get something like this:  
+C:\Users\{yourName}\AppData\Roaming\npm  
+then add to win10 environment variable (only modify user variable, top box)  
+
+ * 1.) Search environment variables at your start menu's search box.
+ * 2.) Click it then go to Environment Variables...
+ * 3.) Click PATH, click Edit
+ * 4.) Click New and try to copy and paste this: C:\Program Files\nodejs\node_modules\npm\bin
+
+BUT use the path from the "npm config get prefix" step  
+
+### Commands to install mocha/chai on vagrant box
+
+from gitbash shell in project directory
+
+ * sudo npm install --save-dev mocha --no-bin-links
+ * sudo npm install --save-dev chai --no-bin-links
+ * sudo npm install --save-dev chai-http --no-bin-links
+ * optional: I might have not commented out require for mongoose
+	* sudo npm install --save mongoose --no-bin-links
+
 	
 ## Assignment 7 - due 11/07/2017 - Assignments/week11
 
