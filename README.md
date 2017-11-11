@@ -19,22 +19,11 @@ Acceptance Criteria
    
 
 ### Setup win10 to work with mocha
-If your "npm test" is not finding mocha then probably your path in
-win10 is not setup, found this link and summarized below:  
-https://stackoverflow.com/questions/27864040/fixing-npm-path-in-windows-8  
 
-In gitbash with vagrant loaded, get the path from npm:  
-npm config get prefix  
-get something like this:  
-C:\Users\{yourName}\AppData\Roaming\npm  
-then add to win10 environment variable (only modify user variable, top box)  
+for the command "npm test" to work I had to add this path to 
+"test:" in package.json  
 
- * 1.) Search environment variables at your start menu's search box.
- * 2.) Click it then go to Environment Variables...
- * 3.) Click PATH, click Edit
- * 4.) Click New and try to copy and paste this: C:\Program Files\nodejs\node_modules\npm\bin
-
-BUT use the path from the "npm config get prefix" step  
+    "test": "node ./node_modules/mocha/bin/mocha"
 
 ### Commands to install mocha/chai on vagrant box
 
