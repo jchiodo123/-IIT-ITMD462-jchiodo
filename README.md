@@ -25,16 +25,14 @@ for the command "npm test" to work I had to add this path to
 
     "test": "node ./node_modules/mocha/bin/mocha"
 
-### Commands to install mocha/chai on vagrant box
+### Commands to install mocha/chai/etc on vagrant box
 
 from gitbash shell in project directory
 
  * sudo npm install --save-dev mocha --no-bin-links
  * sudo npm install --save-dev chai --no-bin-links
  * sudo npm install --save-dev chai-http --no-bin-links
- * optional: I might have not commented out require for mongoose
-	* sudo npm install --save mongoose --no-bin-links
-
+ * sudo npm install --save-dev chai-json-schema --no-bin-links
 	
 ## Assignment 7 - due 11/07/2017 - Assignments/week11
 
