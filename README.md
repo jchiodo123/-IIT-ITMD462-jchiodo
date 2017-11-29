@@ -4,6 +4,63 @@ ITM462 Assignment link:
 
 https://blackboard.iit.edu/webapps/blackboard/content/listContent.jsp?course_id=_64399_1&content_id=_523362_1&mode=reset
 
+## New envonment using VMware and Ubuntu 16.04
+
+Setup ubuntu on VMware: 
+Get VMware player v12: (other places have it also) 
+https://filehippo.com/download_vmware_player/tech/76193/ 
+VMware-player-12.5.7-5813279.exe 
+
+Get Ubuntu x64 16.04 image: (other places have it also) 
+https://www.ubuntu.com/download/desktop 
+ubuntu-16.04.3-desktop-amd64.iso 
+
+Quick video on how to setup: 
+https://www.youtube.com/watch?v=3ahLN5mUMXs 
+
+---
+
+Install mongodb on ubuntu: 
+https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/ 
+
+1) sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6 
+2) echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list 
+3) sudo apt-get update 
+4) sudo apt-get install -y mongodb-org 
+
+Starting/stopping mongoDB: 
+* sudo service mongod start 
+* sudo service mongod stop 
+* tail -f /var/log/mongodb/mongod.log 
+
+Some mongo shell commands: 
+* use myimdb 
+* db.movies.find().pretty() 
+* db.movies.insert({"name":"Terminator","description":"Some description1"}) 
+* db.movies.insert({"name":"Alien","description":"Some description2"}) 
+
+--- 
+
+Install GIT: 
+
+sudo apt install git 
+git clone https://github.com/IIT-Web-Application-Development/myimdb.git 
+
+--- 
+
+How to install wine and then notepad++ on Ubuntu 
+
+http://www.configserverfirewall.com/ubuntu-linux/install-notepad-plus-plus-ubuntu/ 
+
+--- 
+
+Install VSCode: 
+
+https://code.visualstudio.com/docs/?dv=linux64_deb 
+download file 
+ 
+https://code.visualstudio.com/docs/setup/linux 
+
 
 ## Assignment 8 - due 11/14/2014 - Assignments/week12
 
