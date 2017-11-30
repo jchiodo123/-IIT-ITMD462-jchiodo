@@ -4,7 +4,7 @@ ITM462 Assignment link:
 
 https://blackboard.iit.edu/webapps/blackboard/content/listContent.jsp?course_id=_64399_1&content_id=_523362_1&mode=reset
 
-## New envonment using VMware and Ubuntu 16.04
+## New environment using VMware and Ubuntu 16.04
 
 Setup ubuntu on VMware: 
 Get VMware player v12: (other places have it also) 
